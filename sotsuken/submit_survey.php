@@ -8,10 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // 保存するテキストファイルのパス
     $file = 'test.txt';
-
-    // 書き込む内容を準備
-    $content = "名前: " . $name . "\nメッセージ: " . $message . "\n\n";
-
+    
     // テキストファイルに書き込む
     if (file_put_contents($file, $content, FILE_APPEND)) {
         echo "データが正常に保存されました。";
