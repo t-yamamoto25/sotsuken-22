@@ -6,9 +6,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Q2. 座席番号
     $seat_number = isset($_POST['seat_number']) ? htmlspecialchars($_POST['seat_number'], ENT_QUOTES, 'UTF-8') : '';
 
-    // 結果を表示（後でデータベースに保存する処理に置き換え可能）
-    echo "<h1>アンケート結果</h1>";
-    echo "<p><strong>選択された演習問題:</strong> " . implode(', ', $exercises) . "</p>";
-    echo "<p><strong>座席番号:</strong> " . $seat_number . "</p>";
+    // 保存するテキストファイルのパス
+    $file = 'test.txt';
+
+    // 書き込む内容を準備
+    $content = "名前: " . $name . "\nメッセージ: " . $message . "\n\n";
+
+    // テキストファイルに書き込む
+    if (file_put_contents($file, $content, FILE_APPEND)) {
+        echo "データが正常に保存されました。";
+    } else {
+        echo "データの保存に失敗しました。";
+    }
+} else {
+    echo "不正なリクエストです。";
 }
 ?>
