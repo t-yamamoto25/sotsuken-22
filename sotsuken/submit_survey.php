@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // フォームから送信されたデータを受け取る
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Q1. 演習問題（配列の内容を文字列に変換して保存）
