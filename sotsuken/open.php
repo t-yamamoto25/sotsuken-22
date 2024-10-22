@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // フォームデータの受け取り
     $name = htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8');
