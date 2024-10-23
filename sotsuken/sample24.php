@@ -1,5 +1,5 @@
 <?php
-$succes = file_put_contents('./news_data/test.text','2024 更新しました');
+$succes = file_put_contents('./test_data/test.text','2024 更新しました');
 ?>
 <?php
 if($succes){
