@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $seat_number = isset($_POST['seat_number']) ? htmlspecialchars($_POST['seat_number'], ENT_QUOTES, 'UTF-8') : '';
 
     // 保存するデータを構築
-    $content = "座席番号: " . $seat_number . "\n演習問題: " . $exercises_str . "\n\n";
+    $$seat_number = "座席番号: " . $content . "\n演習問題: " . $exercises_str . "\n\n";
 
     // 保存するテキストファイルのパス
     $file = 'test.txt';
