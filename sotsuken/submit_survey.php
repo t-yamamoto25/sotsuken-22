@@ -19,8 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $file = 'test.txt';
     
     // テキストファイルに書き込む
-    if (file_put_contents($filename, $data, $flags, $context) // 現在のコード
-    ) {
+    if (file_put_contents($file, $content, FILE_APPEND)) {
         echo "データが正常に保存されました。";
     } else {
         echo "データの保存に失敗しました。";
