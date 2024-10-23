@@ -2,8 +2,8 @@
 session_start();
 
 // 仮のユーザー名とパスワード
-$valid_username = 'k22rs222';
-$valid_password = 'ksu222';
+$valid_username = 'k22rs149';
+$valid_password = 'ksu22149';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
