@@ -8,16 +8,15 @@
 <body>
     <h1>アンケートに回答してください</h1>
     <form id="surveyForm">
-        <!-- Q1. 疑問がある演習問題を選択 -->
+        <label>名前: <input type="text" id="name" required></label><br><br>
+
         <p>Q1. 疑問がある演習問題を選択してください。（複数回答可）</p>
         <label><input type="radio" name="exercise" value="演習1"> 演習1</label><br>
         <label><input type="radio" name="exercise" value="演習2"> 演習2</label><br>
         <label><input type="radio" name="exercise" value="演習3"> 演習3</label><br><br>
 
-        <!-- Q2. 座席番号の入力 -->
         <label>Q2. 座席番号を入力してください: <input type="text" id="seat_number" required></label><br><br>
 
-        <!-- 送信ボタン -->
         <button type="button" onclick="submitSurvey()">送信</button>
     </form>
 
@@ -27,7 +26,6 @@
             const exercise = document.querySelector('input[name="exercise"]:checked')?.value || '';
             const seat_number = document.getElementById('seat_number').value;
 
-            // AJAXリクエストでアンケート送信
             const xhr = new XMLHttpRequest();
             xhr.open('POST', 'submit_survey.php', true);
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
