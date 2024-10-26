@@ -1,69 +1,39 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ログイン</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        .login-container {
-            width: 300px;
-            margin: 100px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .login-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .login-container input[type="text"],
-        .login-container input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-        }
-        .login-container button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            border: none;
-            color: white;
-            cursor: pointer;
-        }
-        .login-container button:hover {
-            background-color: #0056b3;
-        }
-        .error-message {
-            color: red;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-    </style>
-</head>
-<body>
+<?php
+session_start();
 
-<div class="login-container">
-    <h2>ログイン</h2>
-    <?php if (isset($_GET['error'])): ?>
-        <div class="error-message">ユーザー名またはパスワードが違います。</div>
-    <?php endif; ?>
-    <form action="login_process.php" method="post">
-        <label for="username">ユーザー名</label>
-        <input type="text" id="username" name="username" required>
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "sotsuken22";
 
-        <label for="password">パスワード</label>
-        <input type="password" id="password" name="password" required>
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-        <button type="submit">ログイン</button>
-    </form>
-</div>
-</body>
-</html>
+if ($conn->connect_error) {
+    die("接続失敗: " . $conn->connect_error);
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $conn->real_escape_string($_POST['username']);
+    $password = $conn->real_escape_string($_POST['password']);
+
+    $sql = "SELECT * FROM users WHERE username='$username' AND password='$password'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows == 1) {
+        $user = $result->fetch_assoc();
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['role'] = $user['role'];
+
+        if ($user['role'] === 'student') {
+            header("Location: student.html");
+        } else if ($user['role'] === 'teacher') {
+            header("Location: teacher.html");
+        }
+        exit();
+    } else {
+        echo "IDまたはパスワードが間違っています";
+    }
+}
+
+$conn->close();
+?>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生用アンケートページ</title>
+</head>
+<body>
+    <h1>アンケートに回答してください</h1>
+    <form id="surveyForm">
+        <label>名前: <input type="text" id="name" required></label><br><br>
+        <label>回答: <textarea id="answer" required></textarea></label><br><br>
+        <button type="button" onclick="submitSurvey()">送信</button>
+    </form>
+    <script>
+        function submitSurvey() {
+            const name = document.getElementById('name').value;
+            const answer = document.getElementById('answer').value;
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'submit_survey.php', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    alert('送信しました！');
+                    document.getElementById('surveyForm').reset();
+                }
+            };
+            xhr.send(`name=${name}&answer=${answer}`);
+        }
+    </script>
+</body>
+</html>

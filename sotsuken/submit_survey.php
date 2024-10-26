@@ -1,29 +1,27 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "sitsuken22";
 
-// フォームから送信されたデータを受け取る
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Q1. 演習問題（配列の内容を文字列に変換して保存）
-    $exercises = isset($_POST['exercises']) ? $_POST['exercises'] : [];
-    $exercises_str = implode(", ", $exercises); // 配列をカンマで区切った文字列に変換
-    
-    // Q2. 座席番号
-    $seat_number = isset($_POST['seat_number']) ? htmlspecialchars($_POST['seat_number'], ENT_QUOTES, 'UTF-8') : '';
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-    // 保存するデータを構築
-    $content = "座席番号: " . $seat_number . "\n演習問題: " . $exercises_str . "\n\n";
-
-    // 保存するテキストファイルのパス
-    $file = 'test.txt';
-    
-    // テキストファイルに書き込む
-    if (file_put_contents($file, $content, FILE_APPEND)) {
-        echo "データが正常に保存されました。";
-    } else {
-        echo "データの保存に失敗しました。";
-    }
-} else {
-    echo "不正なリクエストです。";
+if ($conn->connect_error) {
+    die("接続失敗: " . $conn->connect_error);
 }
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $conn->real_escape_string($_POST['name']);
+    $exercise = $conn->real_escape_string($_POST['exercise']);
+    $seat_number = $conn->real_escape_string($_POST['seat_number']);
+
+    $sql = "INSERT INTO responses (student_name, answer, exercise, seat_number) VALUES ('$name', '', '$exercise', '$seat_number')";
+    if ($conn->query($sql) === TRUE) {
+        echo "アンケートが送信されました";
+    } else {
+        echo "エラー: " . $sql . "<br>" . $conn->error;
+    }
+}
+
+$conn->close();
+?>
