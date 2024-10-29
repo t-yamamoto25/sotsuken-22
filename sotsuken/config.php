@@ -1,7 +1,7 @@
 <?php
 // データベース接続設定
 $servername = "localhost";
-$username = "root"; // データベースのユーザー名
+$username = "root@localhost"; // データベースのユーザー名
 $password = ""; // データベースのパスワード
 $dbname = "sotsuken22"; // データベース名
 
