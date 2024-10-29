@@ -2,7 +2,7 @@
 // データベース接続設定
 $servername = "localhost";
 $username = "root"; // データベースのユーザー名
-$password = " "; // データベースのパスワード
+$password = ""; // データベースのパスワード
 $dbname = "sotsuken22"; // データベース名
 
 // データベースへの接続を確立
