@@ -1,20 +1,31 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 session_start();
+include 'config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    if ($username === 'k22rs149' && $password === 'ksu22149') {
-        $_SESSION['username'] = $username;
-        $_SESSION['role'] = 'student';  // 仮に学生用ページに飛ぶよう設定
-        header("Location: student.html");
-        exit();
+    $sql = "SELECT * FROM users WHERE username=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+
+    if ($user && password_verify($password, $user['password'])) {
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['role'] = $user['role'];
+        header("Location: dashboard.php");
     } else {
-        echo "ユーザー名またはパスワードが正しくありません。";
+        echo "Invalid credentials";
     }
 }
 ?>
+
+<!-- HTML フォーム -->
+<form method="POST">
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <button type="submit">Login</button>
+</form>
