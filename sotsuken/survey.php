@@ -95,7 +95,7 @@
             <input type="text" name="seat_number" placeholder="例: 001" required><br>
 
             <!-- Q3: 任意の記入欄 -->
-            <label>Q3. 何かあれば記入してください。（必須ではない）</label>
+            <label>Q3. 何かあれば記入してください。</label>
             <textarea name="comments" placeholder="ご自由に記入してください"></textarea><br>
 
             <button type="submit">送信</button>
