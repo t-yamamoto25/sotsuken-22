@@ -2,80 +2,81 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>教員ページ - アンケート結果</title>
+    <title>アンケート結果 - 教員用ページ</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f9f9f9;
-            color: #333;
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+            padding-top: 20px;
         }
-
         .container {
+            width: 80%;
+            max-width: 800px;
             background-color: #ffffff;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            width: 100%;
         }
-
         h1 {
-            font-size: 1.5em;
-            margin-bottom: 20px;
             color: #4a90e2;
             text-align: center;
         }
-
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            margin-top: 20px;
         }
-
         th, td {
-            padding: 10px;
+            padding: 12px;
             border: 1px solid #ddd;
-            text-align: left;
+            text-align: center;
         }
-
         th {
             background-color: #4a90e2;
-            color: white;
+            color: #ffffff;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>アンケート結果一覧</h1>
-        
-        <table>
+<div class="container">
+    <h1>アンケート結果一覧</h1>
+    
+    <?php
+    // 仮の回答データ
+    $responses = [
+        ['name' => 'Aさん', 'Q1' => ['演習1'], 'Q2' => '149', 'Q3' => '特にありません。'],
+        ['name' => 'Bさん', 'Q1' => ['演習1', '演習2'], 'Q2' => '23', 'Q3' => '特にありません。'],
+        ['name' => 'Cさん', 'Q1' => ['演習1', '演習3'], 'Q2' => '33', 'Q3' => '特にありません。'],
+        ['name' => 'Dさん', 'Q1' => ['演習2', '演習3'], 'Q2' => '10', 'Q3' => 'こっそり教えてほしいです。'],
+        ['name' => 'Eさん', 'Q1' => ['演習2'], 'Q2' => '53', 'Q3' => '特にありません。'],
+        ['name' => 'Fさん', 'Q1' => ['演習3'], 'Q2' => '110', 'Q3' => '特にありません。']
+    ];
+    ?>
+
+    <table>
+        <tr>
+            <th>名前</th>
+            <th>Q1: 演習問題の選択</th>
+            <th>Q2: 座席番号</th>
+            <th>Q3: コメント</th>
+        </tr>
+
+        <?php foreach ($responses as $response): ?>
             <tr>
-                <th>ユーザー名</th>
-                <th>Q1: 演習問題の選択</th>
-                <th>Q2: 座席番号</th>
-                <th>Q3: コメント</th>
+                <td><?php echo htmlspecialchars($response['name']); ?></td>
+                <td><?php echo htmlspecialchars(implode(", ", $response['Q1'])); ?></td>
+                <td><?php echo htmlspecialchars($response['Q2']); ?></td>
+                <td><?php echo htmlspecialchars($response['Q3']); ?></td>
             </tr>
-            <tr>
-                <td>Aさん</td>
-                <td>演習1</td>
-                <td>149</td>
-                <td>特にありません。</td>
-            </tr>
-            <tr>
-                <td>Bさん</td>
-                <td>演習1, 演習2</td>
-                <td>23</td>
-                <td>特にありません。</td>
-            </tr>
-        </table>
-    </div>
+        <?php endforeach; ?>
+    </table>
+</div>
 
 </body>
 </html>
