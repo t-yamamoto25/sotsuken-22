@@ -92,7 +92,7 @@
 
             <!-- Q2: 座席番号を入力 -->
             <label>Q2. 座席番号を入力してください。</label>
-            <input type="text" name="seat_number" placeholder="例: A-12" required><br>
+            <input type="text" name="seat_number" placeholder="例: 001" required><br>
 
             <!-- Q3: 任意の記入欄 -->
             <label>Q3. 何かあれば記入してください。（必須ではない）</label>
