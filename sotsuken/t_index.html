@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>教員用アンケート結果</title>
+</head>
+<body>
+    <h1>教員用アンケート結果</h1>
+    <div id="result">
+        <ul id="surveyResult"></ul>
+    </div>
+
+    <script>
+        fetch('/get-survey-results')
+            .then(response => response.json())
+            .then(data => {
+                const resultList = document.getElementById('surveyResult');
+                resultList.innerHTML = data.map(result => `
+                    <li>
+                        <strong>Q1:</strong> ${result.q1.join(', ')}<br>
+                        <strong>Q2:</strong> ${result.q2}<br>
+                        <strong>Q3:</strong> ${result.q3 || "特になし"}
+                    </li>
+                `).join('');
+            });
+    </script>
+</body>
+</html>

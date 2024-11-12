@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>学生用アンケート</title>
+</head>
+<body>
+    <h1>学生用アンケート</h1>
+    <form id="surveyForm">
+        <div>
+            <label>Q1. 演習問題を選択してください。（必須）</label><br>
+            <input type="checkbox" name="q1" value="演習1"> 演習1<br>
+            <input type="checkbox" name="q1" value="演習2"> 演習2<br>
+            <input type="checkbox" name="q1" value="演習3"> 演習3
+        </div>
+        <div>
+            <label>Q2. 座席番号を記入してください。（必須）</label><br>
+            <input type="text" id="q2" required>
+        </div>
+        <div>
+            <label>Q3. 何かあれば記入してください。（任意）</label><br>
+            <textarea id="q3"></textarea>
+        </div>
+        <button type="button" onclick="submitSurvey()">送信</button>
+    </form>
+
+    <script>
+        function submitSurvey() {
+            const q1Answers = Array.from(document.querySelectorAll('input[name="q1"]:checked')).map(cb => cb.value);
+            const q2Answer = document.getElementById('q2').value;
+            const q3Answer = document.getElementById('q3').value;
+
+            if (q1Answers.length === 0 || !q2Answer) {
+                alert("Q1とQ2は必須です。");
+                return;
+            }
+
+            const data = { q1: q1Answers, q2: q2Answer, q3: q3Answer };
+
+            fetch('/submit-survey', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("アンケートが保存されました。");
+                    document.getElementById('surveyForm').reset();
+                } else {
+                    alert("アンケートの保存に失敗しました。");
+                }
+            });
+        }
+    </script>
+</body>
+</html>
