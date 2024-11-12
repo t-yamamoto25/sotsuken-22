@@ -1,0 +1,46 @@
+body{
+    background-color: beige;
+  }
+  h1 {
+    background-color: burlywood;
+    font-size: 30pt;
+    text-shadow: 1px 1px 0px #ffffff, 3px 3px 2px #663333;
+  }
+  h2{
+    background-color: rgb(234, 209, 176);
+    font-weight: bolder;
+  }
+  h3 {
+    background-color: rgb(234, 209, 176);
+  }
+  
+  .text{
+    font-size: 16pt;
+  }
+  
+  .wrapper {
+    margin-right: auto; 
+    margin-left:  auto; 
+    max-width: 960px;  
+    padding-right: 10px; 
+    padding-left:  10px; 
+  }
+  #navbar {
+    background-color: rgb(75, 78, 146);
+    color: white;
+    text-align: right;
+    vertical-align:middle;
+    min-height: 20pt;
+  }
+  @keyframes myframe {
+    from {
+      font-size: 24pt;
+    }
+    to {
+      font-size: 30pt;
+    }
+  }
+  .move {
+    position: absolute;
+    animation: myframe 2.0s ease-in 1s infinite alternate both;
+  }
